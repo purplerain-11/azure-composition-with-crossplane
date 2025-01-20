@@ -1,0 +1,19 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: azure-secret
+      key: creds
+nenko@Dell-Precision2070:~$ cat resource-group.yaml
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: crossplane-quickstart-rg
+spec:
+  forProvider:
+    location: "North Europe"

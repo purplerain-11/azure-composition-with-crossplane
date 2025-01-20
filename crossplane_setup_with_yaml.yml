@@ -1,0 +1,31 @@
+- name: Crossplane Setup on Azure Using YAML Files
+  hosts: localhost
+  gather_facts: no
+  vars:
+    yaml_files_path: "./"  # Path where your YAML files are stored
+
+  tasks:
+    - name: Apply Azure Provider YAML
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ yaml_files_path }}/get-azure-provider.yaml"
+
+    - name: Apply Provider Config YAML
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ yaml_files_path }}/provider-config.yaml"
+
+    - name: Apply Resource Group YAML
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ yaml_files_path }}/resource-group.yaml"
+
+    - name: Apply Virtual Network YAML
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ yaml_files_path }}/virtual-network.yaml"
+
+    - name: Apply Virtual Machine YAML
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ yaml_files_path }}/virtual-machine.yaml"

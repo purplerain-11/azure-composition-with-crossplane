@@ -1,0 +1,27 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  name: crossplane-quickstart-vm
+spec:
+  providerConfigRef:
+    name: default # Use "default" as the provider config name
+  deletionPolicy: Delete # Or "Orphan" based on your requirements
+  forProvider:
+    location: "North Europe" # Specify your Azure region
+    resourceGroupName: "crossplane-quickstart-rg" # The resource group for the VM
+    size: "Standard_B1ms"
+    adminUsername: "azureuser"
+    adminPasswordSecretRef:
+      name: vm-password-secret # I created a secret so we don’t store it in plaintext
+      key: password
+      namespace: default
+    disablePasswordAuthentication: false # Disabled SSH key requirement just for the test not having to generate ssh keys for nothing
+    networkInterfaceIds:
+      - "/subscriptions/e8e5b172-my-sub9661703/resourceGroups/crossplane-quickstart-rg/providers/Microsoft.Network/networkInterfaces/my-nic" # I had to create my own nic and register for Microsoft.Compute
+    osDisk:
+      - caching: "ReadWrite" # Specify caching for the OS disk
+    sourceImageReference:
+      - publisher: "Canonical"
+        offer: "UbuntuServer" # Ensure you have the right offer
+        sku: "18.04-LTS" # Specify the SKU for the OS image
+        version: "latest" # Use the latest version
