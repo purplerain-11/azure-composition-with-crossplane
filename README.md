@@ -2,6 +2,8 @@
 
 This guide explains how to set up Crossplane on Azure using an Ansible playbook. The playbook applies pre-defined Kubernetes YAML manifests for each step of the setup.
 
+The result is to orchestrate a reasorce group containing a virtual network that has a working virtual machine inside azure.
+
 ---
 
 ## How to Use the Playbook
