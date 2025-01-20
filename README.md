@@ -21,3 +21,15 @@ project-directory/
 ├── virtual-network.yaml
 ├── virtual-machine.yaml
 └── crossplane_setup_with_yaml.yml  # The Ansible playbook
+```
+### 2. Install Ansible and Dependencies:
+
+Make sure Ansible is installed on your system.
+Then, install the Kubernetes Ansible collection:
+```bash
+ansible-galaxy collection install kubernetes.core
+```
+### 3. Run the Playbook:
+```bash
+ansible-playbook crossplane_setup_with_yaml.yml
+```
